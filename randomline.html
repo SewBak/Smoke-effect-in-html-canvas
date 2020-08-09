@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>Random terrain generation</title>
+		<style>
+		body{
+				background-color:black;
+				margin:0;
+				padding:0;
+			}
+		#first{
+				margin: 0;
+				width:100%;
+				height:100%
+			}
+		#c{
+				position: relative;
+				top: 50%;
+				width:90vmin;
+				height:90vmin;
+				-webkit-transform: translateY(-50%);
+				-ms-transform: translateY(-50%);
+				transform: translateY(-50%);
+				background-color:black;
+				border:3px solid red;
+				display:block;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+	<div id = "first">
+			<canvas id = "c" width = "400" height = "400"></canvas>
+	</div>
+	<script>
+		var canv = document.getElementById("c");
+		var d = canv.getContext("2d");
+		var w = canv.width;
+		var h = canv.height;
+		var start = canv.height / 2;
+		var sh = 15;
+		d.translate(0.2, 0.2);
+		d.fillStyle = "red";
+		setInterval(drawPath,1);
+		function drawPath(){
+			d.globalCompositeOperation = "copy";
+			d.drawImage(d.canvas,-1, 0);
+			d.globalCompositeOperation = "source-over";
+			var bool = Math.random() < 0.5;
+			if(bool){start++;}
+			else{start--;}
+			d.fillRect(w - 1,start,1,sh);
+		}
+	</script>
+	</body>
+</html>
